@@ -41,13 +41,13 @@ include("../src/search.php")
             <li class="nav-item">
               <a class="nav-link" href="../">Home</a>
             </li>
-            <!-- Link to the user's reservations page -->
+            <!-- Link to the reservation page -->
             <li class="nav-item">
-              <a class="nav-link" href="../">As Minhas Reservas</a>
+              <a class="nav-link" href="/public/searchResult.php?searchQuery=">Reservar Material</a>
             </li>
-            <!-- Link to a dummy page -->
+            <!-- Link to user's reservations page -->
             <li class="nav-item">
-              <a class="nav-link" href="../">Ipsum</a>
+              <a class="nav-link" href="/public/reservations.php">As Minhas Reservas</a>
             </li>
           </ul>
         </div>
