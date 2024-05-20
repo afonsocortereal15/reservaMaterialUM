@@ -34,7 +34,7 @@
               <a class="nav-link" href="./">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="./">Lorem</a>
+              <a class="nav-link" href="public/reservations.php">As Minhas Reservas</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="./">Ipsum</a>
