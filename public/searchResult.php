@@ -37,7 +37,7 @@ include("../src/search.php");
               <a class="nav-link" href="../">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="../">Lorem</a>
+              <a class="nav-link" href="reservations.php">As Minhas Reservas</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="../">Ipsum</a>
@@ -61,7 +61,7 @@ include("../src/search.php");
                 </tr>
               </thead>
               <tbody>
-                <?php printTable(); ?>
+                <?php printMaterialsTable(); ?>
               </tbody>
             </table>
             <!-- Modal -->
@@ -78,16 +78,16 @@ include("../src/search.php");
                     <!-- Modal Body -->
                     <div class="modal-body">
 
-                      <!-- Material type select -->
-                      <select class="form-select" aria-label="Default select example" id="materialType" name="materialType"required>
-                        <option value="" selected>Selecione o tipo de material</option>
+                      <!-- User select -->
+                      <select class="form-select" aria-label="Default select example" id="materialType" name="user"required>
+                        <option value="" selected>Selecione utilizador</option>
                         <?php
-                        $sql = "SELECT * FROM materialtype";
+                        $sql = "SELECT * FROM users";
                         $result = $conn->query($sql);
 
                         if ($result->num_rows > 0) {
                           while ($row = $result->fetch_assoc()) {
-                            echo "<option value=\"" . $row["idType"] . "\">" . $row["nameType"] . "</option>";
+                            echo "<option value=\"" . $row["idUser"] . "\">" . $row["nameUser"] . "</option>";
                           }
                         } else {
                           echo "<option>SEM RESULTADOS - CONTACTAR ADMIN</option>";
