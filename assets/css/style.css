@@ -1,0 +1,26 @@
+body {
+  font-family: "Poppins", sans-serif;
+  font-weight: 300;
+}
+
+footer {
+  margin: auto;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+a {
+  color: none;
+}
+
+.nav-link {
+  color: white;
+}
+
+.nav-link:hover {
+  color: #dadada;
+}
+
+.bi-list {
+  color: white;
+}
