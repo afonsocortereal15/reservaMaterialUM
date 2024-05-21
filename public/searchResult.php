@@ -83,7 +83,7 @@ include("../src/search.php");
                     <div class="modal-body">
 
                       <!-- User select -->
-                      <select class="form-select" aria-label="Default select example" id="materialType" name="user"required>
+                      <select class="mb-2" id="user" name="user" required>
                         <option value="" selected>Selecione utilizador</option>
                         <?php
                         $sql = "SELECT * FROM users";
@@ -100,7 +100,7 @@ include("../src/search.php");
                       </select>
 
                       <!-- Material select -->
-                      <select class="form-select" aria-label="Default select example" name="material" required>
+                      <select class="mb-2" id="material" name="material" required>
                         <option value="" selected>Selecione o material</option>
                         <?php
                         $sql = "SELECT * FROM materials";
@@ -117,10 +117,10 @@ include("../src/search.php");
                       </select>
 
                       <!-- Start reservation -->
-                      <input class="datetimePicker" type="datetime-local" id="startReservation" name="startReservation">
+                      <input class="datetimePicker mb-2" type="datetime-local" id="startReservation" name="startReservation">
 
                       <!-- End reservation -->
-                      <input class="datetimePicker" type="datetime-local" id="endReservation" name="endReservation">
+                      <input class="datetimePicker mb-2" type="datetime-local" id="endReservation" name="endReservation">
                     </div>
 
                     <!-- Modal Footer -->

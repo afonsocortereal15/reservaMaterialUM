@@ -59,7 +59,7 @@ include("../src/search.php")
           <div class="col-md-12 bg-white rounded-3" style="padding: 20px;">
             <form>
               <!-- User select -->
-              <select class="form-select" name="user" required>
+              <select class="form-select mb-1" name="user" required>
                 <option value="" selected>Selecione utilizador</option>
                 <?php
                 // Query to retrieve all users from the database
@@ -78,7 +78,7 @@ include("../src/search.php")
                 ?>
               </select>
               <!-- Search button -->
-              <button type="submit" class="btn" style="background: #cc6633; color: white;">Pesquisar</button>
+              <button type="submit" class="btn w-25" style="background: #cc6633; color: white;">Pesquisar</button>
             </form>
             <table class="table">
               <thead>
@@ -116,7 +116,7 @@ include("../src/search.php")
                 }
                 ?>
               </select>
-              <button type="submit" class="btn btn-danger">Cancelar reserva</button>
+              <button type="submit" class="btn btn-danger w-25">Cancelar reserva</button>
             </form>
           </div>
         </div>
