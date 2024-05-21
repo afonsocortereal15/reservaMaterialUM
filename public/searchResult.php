@@ -21,6 +21,11 @@ include("../src/search.php");
   <!-- Custom CSS -->
   <link rel="stylesheet" href="../assets/css/style.css">
   <link rel="stylesheet" href="../assets/css/searchResult-style.css">
+
+  <!-- JS for materials select -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/js/standalone/selectize.min.js" integrity="sha256-+C0A5Ilqmu4QcSPxrlGpaZxJ04VjsRjKu+G82kl5UJk=" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/css/selectize.bootstrap3.min.css" integrity="sha256-ze/OEYGcFbPRmvCnrSeKbRTtjG4vGLHXgOqsyLFTRjg=" crossorigin="anonymous" />
 </head>
 
 <body class="d-flex flex-column h-100">
@@ -54,7 +59,9 @@ include("../src/search.php");
       <div class="container">
         <div class="row gx-5 align-items-center justify-content-center">
           <div class="col-md-12 bg-white rounded-3" style="padding: 20px;">
-            <button type="button" class="btn reserve-btn" data-bs-toggle="modal" data-bs-target="#reservationModal">Reservar material</button>
+            <div class="text-center pb-3">
+              <button type="button" class="btn reserve-btn md-2 w-25" data-bs-toggle="modal" data-bs-target="#reservationModal">Reservar material</button>
+            </div>
             <table class="table">
               <thead>
                 <tr>
@@ -141,5 +148,13 @@ include("../src/search.php");
 
   </footer>
 </body>
+
+<script>
+  $(document).ready(function() {
+    $('select').selectize({
+      sortField: 'text'
+    });
+  });
+</script>
 
 </html>
