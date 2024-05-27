@@ -35,7 +35,7 @@ if (mysqli_query($conn, $sql2)) {
   mysqli_query($conn, $sql3);
   
   // Redirect to the reservations page after successful deletion
-  header("Location:../public/reservations.php");
+  header("Location:../public/reservations.php?user=0");
 } else {
   // Display an error message if the deletion fails
   echo "Error: ". $sql. "<br>". mysqli_error($conn);

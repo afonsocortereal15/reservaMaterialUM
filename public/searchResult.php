@@ -49,7 +49,7 @@ include("../src/search.php");
             </li>
             <!-- Link to user's reservations page -->
             <li class="nav-item">
-              <a class="nav-link" href="/public/reservations.php">As Minhas Reservas</a>
+              <a class="nav-link" href="/public/reservations.php?user=0">As Minhas Reservas</a>
             </li>
           </ul>
         </div>
