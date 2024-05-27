@@ -24,6 +24,11 @@ include("../src/search.php")
   <!-- Custom CSS -->
   <link rel="stylesheet" href="../assets/css/style.css">
   <link rel="stylesheet" href="../assets/css/searchResult-style.css">
+
+  <!-- JS for materials select -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/js/standalone/selectize.min.js" integrity="sha256-+C0A5Ilqmu4QcSPxrlGpaZxJ04VjsRjKu+G82kl5UJk=" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/css/selectize.bootstrap3.min.css" integrity="sha256-ze/OEYGcFbPRmvCnrSeKbRTtjG4vGLHXgOqsyLFTRjg=" crossorigin="anonymous" />
 </head>
 
 <body class="d-flex flex-column h-100">
@@ -47,7 +52,7 @@ include("../src/search.php")
             </li>
             <!-- Link to user's reservations page -->
             <li class="nav-item">
-              <a class="nav-link" href="/public/reservations.php">As Minhas Reservas</a>
+              <a class="nav-link" href="/public/reservations.php?user=0">As Minhas Reservas</a>
             </li>
           </ul>
         </div>
@@ -57,9 +62,12 @@ include("../src/search.php")
       <div class="container">
         <div class="row gx-5 align-items-center justify-content-center">
           <div class="col-md-12 bg-white rounded-3" style="padding: 20px;">
-            <form>
+          <div class="text-center">
+            <h2>As Minhas Reservas</h2>
+          </div>
+            <form action="reservations.php" method="GET">
               <!-- User select -->
-              <select class="form-select mb-1" name="user" required>
+              <select class="mb-1" id="user" name="user" required>
                 <option value="" selected>Selecione utilizador</option>
                 <?php
                 // Query to retrieve all users from the database
@@ -99,8 +107,8 @@ include("../src/search.php")
                 ?>
               </tbody>
             </table>
-            <form action="../src/cancelReservation.php" method="GET">
-              <select class="form-select" name="cancelReservation" required>
+            <form action="../src/cancelReservation.php">
+              <select class="mb-1" name="cancelReservation" required>
                 <option value="" selected>Selecione reserva</option>
                 <?php
                 // Query the database for reservations associated with the current user
@@ -127,5 +135,13 @@ include("../src/search.php")
 
   </footer>
 </body>
+
+<script>
+  $(document).ready(function() {
+    $('select').selectize({
+      sortField: 'text'
+    });
+  });
+</script>
 
 </html>
