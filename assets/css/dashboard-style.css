@@ -1,0 +1,24 @@
+.background {
+  background-image: url('../imgs/background.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.reserve-btn {
+  color:white !important; 
+  background-color: #cc6633 !important;
+}
+
+.reserve-btn:hover {
+  background-color: #cf6e3e !important;
+}
+
+.save-btn {
+  color:white !important; 
+  background-color: #cc6633 !important;
+}
+
+.save-btn:hover {
+  background-color: #cf6e3e !important;
+}
