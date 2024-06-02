@@ -110,7 +110,7 @@ include("../src/search.php");
                       <select class="mb-2" id="material" name="material" required>
                         <option value="" selected>Selecione o material</option>
                         <?php
-                        $sql = "SELECT * FROM materials";
+                        $sql = "SELECT * FROM materials WHERE nameMaterial LIKE '%$searchQuery%'";
                         $result = $conn->query($sql);
 
                         if ($result->num_rows > 0) {
