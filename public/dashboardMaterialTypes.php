@@ -107,4 +107,14 @@ include("../src/editMaterialType.php");
   });
 </script>
 
+<script>
+function deleteType(type) {
+  // Send an AJAX request to the server
+  fetch('../src/deleteMaterialType.php?type=' + type)
+  .then(response => response.text())
+  .then(data => console.log('Request successful!', data))
+  .catch(error => console.error('Error:', error));
+}
+</script>
+
 </html>
