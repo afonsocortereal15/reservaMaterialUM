@@ -39,13 +39,14 @@ function printForm($type) {
     </div>
     <button type="submit" class="btn save-btn">Guardar</button>
     
-    <form><button type="button" class="btn btn-danger" id="delete-btn">Apagar Tipo</button></form>
+    <button type="button" class="btn btn-danger" id="delete-btn" onclick="deleteType('. $type .')">Apagar Tipo</button>
   </form>
   ';
 }
 
 function deleteType($type) {
   global $conn;
+  echo $type;
   $sql ="DELETE FROM materialtype WHERE idType=$type";
   if (mysqli_query($conn, $sql)) {
     echo "apagado";
