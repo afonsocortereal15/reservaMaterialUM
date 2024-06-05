@@ -1,7 +1,7 @@
 <?php
 // Include the connection file to establish a database connection
 include("../inc/connect.inc");
-include("../src/editMaterialType.php");
+include("../src/materialTypeEdit.php");
 ?>
 <html lang="pt-pt">
 
@@ -78,7 +78,7 @@ include("../src/editMaterialType.php");
                   }
                 } else {
                   // Display a message if no users are found
-                  echo "<option>SEM RESULTADOS - CONTACTAR ADMIN</option>";
+                  echo "<option>SEM RESULTADOS</option>";
                 }
                 ?>
               </select>
@@ -92,11 +92,41 @@ include("../src/editMaterialType.php");
               }
               ?>
             </h4>
+            <button type="button" class="btn btn-success md-2 w-25" data-bs-toggle="modal" data-bs-target="#reservationModal">Criar tipo</button>
           </div>
         </div>
       </div>
     </main>
   </section>
+  <!-- Modal -->
+  <div class="modal fade" id="reservationModal" tabindex="-1" aria-labelledby="reservationModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <form action="../src/materialTypeCreate.php" method="POST">
+          <!-- Modal header -->
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="reservationModalLabel">Criar tipo de material</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+
+          <!-- Modal Body -->
+          <div class="modal-body">
+            <form action="../src/materialTypeCreate.php">
+              <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">Nome do Tipo</span>
+                <input type="text" class="form-control" name="nameType">
+              </div>
+            </form>
+
+            <!-- Modal Footer -->
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+              <button type="submit" class="btn btn-success">Criar</button>
+            </div>
+        </form>
+      </div>
+    </div>
+  </div>
 </body>
 
 <script>
@@ -108,13 +138,14 @@ include("../src/editMaterialType.php");
 </script>
 
 <script>
-function deleteType(type) {
-  // Send an AJAX request to the server
-  fetch('../src/deleteMaterialType.php?type=' + type)
-  .then(response => response.text())
-  .then(data => console.log('Request successful!', data))
-  .catch(error => console.error('Error:', error));
-}
+  function deleteType(type) {
+    // Send an AJAX request to the server
+    fetch('../src/materialTypeDelete.php?type=' + type)
+      .then(response => response.text())
+      .then(data => console.log('Request successful!', data))
+      .catch(error => console.error('Error:', error));
+    location.href = 'dashboardmaterialTypes.php';
+  }
 </script>
 
 </html>
