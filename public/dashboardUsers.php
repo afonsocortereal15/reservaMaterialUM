@@ -1,3 +1,8 @@
+<?php
+// Include the connection file to establish a database connection
+include("../inc/connect.inc");
+include("../src/usersEdit.php");
+?>
 <html lang="pt-pt">
 
 <head>
@@ -17,7 +22,12 @@
 
   <!-- Custom CSS -->
   <link rel="stylesheet" href="../assets/css/style.css">
-  <link rel="stylesheet" href="../assets/css/searchResult-style.css">
+  <link rel="stylesheet" href="../assets/css/dashboard-style.css">
+
+  <!-- JS for users select -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/js/standalone/selectize.min.js" integrity="sha256-+C0A5Ilqmu4QcSPxrlGpaZxJ04VjsRjKu+G82kl5UJk=" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/css/selectize.bootstrap3.min.css" integrity="sha256-ze/OEYGcFbPRmvCnrSeKbRTtjG4vGLHXgOqsyLFTRjg=" crossorigin="anonymous" />
 </head>
 
 <body class="d-flex flex-column h-100">
@@ -51,12 +61,111 @@
       <div class="container">
         <div class="row gx-5 align-items-center justify-content-center">
           <div class="col-md-12 bg-white rounded-3" style="padding: 20px;">
-          
+            <h2>Utilizadores</h2>
+            <form action="dashboardUsers.php" method="GET">
+              <!-- User select -->
+              <select class="mb-1" id="user" name="user" required>
+                <option value="" selected>Selecione o utilizador</option>
+                <?php
+                // Query to retrieve all users from the database
+                $sql = "SELECT * FROM users";
+                $result = $conn->query($sql);
+
+                if ($result->num_rows > 0) {
+                  while ($row = $result->fetch_assoc()) {
+                    // Generate options for the select dropdown
+                    echo "<option value=\"" . $row["idUser"] . "\">" . $row["nameUser"] . "</option>";
+                  }
+                } else {
+                  // Display a message if no users are found
+                  echo "<option>SEM RESULTADOS</option>";
+                }
+                ?>
+              </select>
+              <!-- Search button -->
+              <button type="submit" class="btn w-25" style="background: #cc6633; color: white;">Selecionar</button>
+            </form>
+            <h4>
+              <?php if (isset($strUser)) {
+                echo $strUser;
+                printForm($user);
+              }
+              ?>
+            </h4>
+            <button type="button" class="btn btn-success md-2 w-25" data-bs-toggle="modal" data-bs-target="#Modal">Criar utilizador</button>
           </div>
         </div>
       </div>
     </main>
   </section>
+  <!-- Modal -->
+  <div class="modal fade" id="Modal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <form action="../src/usersCreate.php" method="POST">
+          <!-- Modal header -->
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="ModalLabel">Criar utilizador</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+
+          <!-- Modal Body -->
+          <div class="modal-body">
+            <form action="../src/usersCreate.php">
+              <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">Nome do Utilizador</span>
+                <input type="text" class="form-control" name="nameUser">
+              </div>
+
+              <select class="mb-1" id="typeUser" name="typeUser" required>
+                <option value="" selected>Selecione o tipo de utilizador</option>
+                <?php
+                // Query to retrieve all types from the database
+                $sql = "SELECT * FROM users";
+                $result = $conn->query($sql);
+
+                if ($result->num_rows > 0) {
+                  while ($row = $result->fetch_assoc()) {
+                    // Generate options for the select dropdown
+                    echo "<option value=\"" . $row["typeUser"] . "\">" . $row["typeUser"] . "</option>";
+                  }
+                } else {
+                  // Display a message if no users are found
+                  echo "<option>SEM RESULTADOS</option>";
+                }
+                ?>
+              </select>
+
+            </form>
+
+            <!-- Modal Footer -->
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+              <button type="submit" class="btn btn-success">Criar</button>
+            </div>
+        </form>
+      </div>
+    </div>
+  </div>
 </body>
+
+<script>
+  $(document).ready(function() {
+    $('select').selectize({
+      sortField: 'text'
+    });
+  });
+</script>
+
+<script>
+  function deletetypeUser(user) {
+    // Send an AJAX request to the server
+    fetch('../src/usersDelete.php?user=' + user)
+      .then(response => response.text())
+      .then(data => console.log('Request successful!', data))
+      .catch(error => console.error('Error:', error));
+    location.href = 'dashboardUsers.php';
+  }
+</script>
 
 </html>
