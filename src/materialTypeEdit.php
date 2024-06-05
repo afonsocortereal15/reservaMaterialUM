@@ -28,7 +28,7 @@ function printForm($type) {
   $result = $conn->query($sql);
   $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
   echo '
-  <form action="../src/editMaterialType.php" method="GET">
+  <form action="../src/materialTypeEdit.php" method="GET">
     <div class="input-group mb-3">
       <span class="input-group-text" id="idType">ID</span>
       <input type="text" class="form-control" value="'. $rows[0]['idType'] .'" aria-describedby="idType"  id="idType" name="idType" readonly>

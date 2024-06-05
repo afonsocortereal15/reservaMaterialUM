@@ -11,6 +11,7 @@ function deleteType($type) {
   $sql ="DELETE FROM materialtype WHERE idType=$type";
   if (mysqli_query($conn, $sql)) {
     echo "Tipo apagado";
+    header("Location:../public/dashboardMaterialTypes.php");
   } else {
     // If there was an error, display the error message
     echo "Apenas pode apagar tipos sem materiais associados";
