@@ -1,8 +1,7 @@
 <?php
 // Include the connection file to establish a database connection
 include("../inc/connect.inc");
-// Include the search functionality file
-include("../src/search.php")
+include("../src/usersEdit.php");
 ?>
 <html lang="pt-pt">
 
@@ -23,9 +22,9 @@ include("../src/search.php")
 
   <!-- Custom CSS -->
   <link rel="stylesheet" href="../assets/css/style.css">
-  <link rel="stylesheet" href="../assets/css/searchResult-style.css">
+  <link rel="stylesheet" href="../assets/css/dashboard-style.css">
 
-  <!-- JS for materials select -->
+  <!-- JS for users select -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/js/standalone/selectize.min.js" integrity="sha256-+C0A5Ilqmu4QcSPxrlGpaZxJ04VjsRjKu+G82kl5UJk=" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/css/selectize.bootstrap3.min.css" integrity="sha256-ze/OEYGcFbPRmvCnrSeKbRTtjG4vGLHXgOqsyLFTRjg=" crossorigin="anonymous" />
@@ -66,13 +65,11 @@ include("../src/search.php")
       <div class="container">
         <div class="row gx-5 align-items-center justify-content-center">
           <div class="col-md-12 bg-white rounded-3" style="padding: 20px;">
-          <div class="text-center">
-            <h2>As Minhas Reservas</h2>
-          </div>
-            <form action="reservations.php" method="GET">
+            <h2>Utilizadores</h2>
+            <form action="dashboardUsers.php" method="GET">
               <!-- User select -->
               <select class="mb-1" id="user" name="user" required>
-                <option value="" selected>Selecione utilizador</option>
+                <option value="" selected>Selecione o utilizador</option>
                 <?php
                 // Query to retrieve all users from the database
                 $sql = "SELECT * FROM users";
@@ -85,59 +82,75 @@ include("../src/search.php")
                   }
                 } else {
                   // Display a message if no users are found
-                  echo "<option>SEM RESULTADOS - CONTACTAR ADMIN</option>";
+                  echo "<option>SEM RESULTADOS</option>";
                 }
                 ?>
               </select>
               <!-- Search button -->
-              <button type="submit" class="btn w-25" style="background: #cc6633; color: white;">Pesquisar</button>
+              <button type="submit" class="btn w-25" style="background: #cc6633; color: white;">Selecionar</button>
             </form>
-            <table class="table">
-              <thead>
-                <tr>
-                  <th scope="col">#</th>
-                  <th scope="col">Material</th>
-                  <th scope="col">Início reserva</th>
-                  <th scope="col">Fim reserva</th>
-                </tr>
-              </thead>
-              <tbody>
-                <?php
-                // Check if the search functionality received user information
-                if (isset($_GET['user'])) {
-                  $userSearch = $_GET['user'];
-                  printUserReservations($userSearch);
-                }
-                ?>
-              </tbody>
-            </table>
-            <form action="../src/cancelReservation.php">
-              <select class="mb-1" name="cancelReservation" required>
-                <option value="" selected>Selecione reserva</option>
-                <?php
-                // Query the database for reservations associated with the current user
-                $sql = "SELECT * FROM reservations WHERE idUser=$userSearch";
-                $result = $conn->query($sql);
-
-                // Check if any reservations were returned
-                if ($result->num_rows > 0) {
-                  // Loop through the results and output an option for each reservation
-                  while ($row = $result->fetch_assoc()) {
-                    echo "<option value=\"" . $row["idReservation"] . "\">" . "Reserva nº " . $row["idReservation"] .  "</option>";
-                  }
-                }
-                ?>
-              </select>
-              <button type="submit" class="btn btn-danger w-25">Cancelar reserva</button>
-            </form>
+            <h4>
+              <?php if (isset($strUser)) {
+                echo $strUser;
+                printForm($user);
+              }
+              ?>
+            </h4>
+            <button type="button" class="btn btn-success md-2 w-25" data-bs-toggle="modal" data-bs-target="#Modal">Criar utilizador</button>
           </div>
         </div>
       </div>
     </main>
   </section>
-  <footer>
+  <!-- Modal -->
+  <div class="modal fade" id="Modal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <form action="../src/usersCreate.php" method="POST">
+          <!-- Modal header -->
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="ModalLabel">Criar utilizador</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
 
-  </footer>
+          <!-- Modal Body -->
+          <div class="modal-body">
+            <form action="../src/usersCreate.php">
+              <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">Nome do Utilizador</span>
+                <input type="text" class="form-control" name="nameUser">
+              </div>
+
+              <select class="mb-1" id="typeUser" name="typeUser" required>
+                <option value="" selected>Selecione o tipo de utilizador</option>
+                <?php
+                // Query to retrieve all types from the database
+                $sql = "SELECT * FROM users";
+                $result = $conn->query($sql);
+
+                if ($result->num_rows > 0) {
+                  while ($row = $result->fetch_assoc()) {
+                    // Generate options for the select dropdown
+                    echo "<option value=\"" . $row["typeUser"] . "\">" . $row["typeUser"] . "</option>";
+                  }
+                } else {
+                  // Display a message if no users are found
+                  echo "<option>SEM RESULTADOS</option>";
+                }
+                ?>
+              </select>
+
+            </form>
+
+            <!-- Modal Footer -->
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+              <button type="submit" class="btn btn-success">Criar</button>
+            </div>
+        </form>
+      </div>
+    </div>
+  </div>
 </body>
 
 <script>
@@ -146,6 +159,17 @@ include("../src/search.php")
       sortField: 'text'
     });
   });
+</script>
+
+<script>
+  function deleteUser(user) {
+    // Send an AJAX request to the server
+    fetch('../src/usersDelete.php?user=' + user)
+      .then(response => response.text())
+      .then(data => console.log('Request successful!', data))
+      .catch(error => console.error('Error:', error));
+    location.href = 'dashboardUsers.php';
+  }
 </script>
 
 </html>

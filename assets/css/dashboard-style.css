@@ -1,0 +1,49 @@
+.background {
+  background-image: url('../imgs/background.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.reserve-btn {
+  color:white !important; 
+  background-color: #cc6633 !important;
+}
+
+.reserve-btn:hover {
+  background-color: #cf6e3e !important;
+}
+
+.save-btn {
+  color:white !important; 
+  background-color: #cc6633 !important;
+}
+
+.save-btn:hover {
+  background-color: #cf6e3e !important;
+}
+
+.datetimePicker {
+  display: block !important;
+  width: 100% !important;
+  padding: .375rem .75rem .375rem .75rem !important;
+  font-size: 1rem !important;
+  font-weight: 400 !important;
+  line-height: 1.5 !important;
+  color: var(--bs-body-color) !important;
+  appearance: none !important;
+  background-color: var(--bs-body-bg) !important;
+  background-image: var(--bs-form-select-bg-img), var(--bs-form-select-bg-icon, none) !important;
+  background-repeat: no-repeat !important;
+  background-position: right .75rem center !important;
+  background-size: 16px 12px !important;
+  border: var(--bs-border-width) solid var(--bs-border-color) !important;
+  border-radius: var(--bs-border-radius) !important;
+  transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out !important;
+}
+
+.edit-select {
+  font-size: 1rem !important;
+  font-weight: 400 !important;
+  line-height: 1.5 !important;
+}

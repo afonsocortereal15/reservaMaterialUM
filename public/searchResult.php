@@ -49,7 +49,11 @@ include("../src/search.php");
             </li>
             <!-- Link to user's reservations page -->
             <li class="nav-item">
-              <a class="nav-link" href="/public/reservations.php">As Minhas Reservas</a>
+              <a class="nav-link" href="/public/reservations.php?user=0">As Minhas Reservas</a>
+            </li>
+            <!-- Link to dashboard page -->
+            <li class="nav-item">
+              <a class="nav-link" href="/public/dashboard.php">Dashboard</a>
             </li>
           </ul>
         </div>
@@ -110,7 +114,7 @@ include("../src/search.php");
                       <select class="mb-2" id="material" name="material" required>
                         <option value="" selected>Selecione o material</option>
                         <?php
-                        $sql = "SELECT * FROM materials";
+                        $sql = "SELECT * FROM materials WHERE nameMaterial LIKE '%$searchQuery%'";
                         $result = $conn->query($sql);
 
                         if ($result->num_rows > 0) {

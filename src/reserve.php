@@ -2,9 +2,6 @@
 // Include the necessary connection file
 include("../inc/connect.inc");
 
-// Global database connection variable
-global $conn;
-
 // Convert the start and end reservation times from ISO 8601 format to MySQL datetime format
 $startReservation = str_replace("T", " ", $_POST['startReservation']);
 $endReservation = str_replace("T", " ", $_POST['endReservation']);

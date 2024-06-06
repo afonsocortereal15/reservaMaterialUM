@@ -41,7 +41,11 @@
             </li>
             <!-- Link to user's reservations page -->
             <li class="nav-item">
-              <a class="nav-link" href="public/reservations.php">As Minhas Reservas</a>
+              <a class="nav-link" href="public/reservations.php?user=0">As Minhas Reservas</a>
+            </li>
+            <!-- Link to dashboard -->
+            <li class="nav-item">
+              <a class="nav-link" href="public/dashboard.php">Dashboard</a>
             </li>
           </ul>
         </div>
@@ -56,7 +60,7 @@
                 Reserva de Material
               </h1>
               <p class="lead fw-normal text-white mb-4">
-                Esta é uma Aplicação Web com o intuito de facilitar a reserva de material como portateis, câmaras e outros equipamentos na UMinho.
+                Esta é uma Aplicação Web com o intuito de facilitar a reserva de material como portáteis, câmaras e outros equipamentos na UMinho.
               </p>
             </div>
             <div class="search">

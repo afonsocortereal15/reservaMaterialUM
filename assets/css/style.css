@@ -24,3 +24,13 @@ a {
 .bi-list {
   color: white;
 }
+
+.form-control:focus {
+  border-color: #cebab0 ;
+  box-shadow: 0 0 0 .25rem rgba(202, 150, 123, 0.25);
+}
+
+.selectize-input.focus {
+  border-color: #cebab0 !important;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(202, 150, 123, 0.6) !important;
+}
