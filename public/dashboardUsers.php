@@ -158,7 +158,7 @@ include("../src/usersEdit.php");
 </script>
 
 <script>
-  function deletetypeUser(user) {
+  function deleteUser(user) {
     // Send an AJAX request to the server
     fetch('../src/usersDelete.php?user=' + user)
       .then(response => response.text())
