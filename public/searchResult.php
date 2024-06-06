@@ -51,6 +51,10 @@ include("../src/search.php");
             <li class="nav-item">
               <a class="nav-link" href="/public/reservations.php?user=0">As Minhas Reservas</a>
             </li>
+            <!-- Link to dashboard page -->
+            <li class="nav-item">
+              <a class="nav-link" href="/public/dashboard.php">Dashboard</a>
+            </li>
           </ul>
         </div>
       </div>
