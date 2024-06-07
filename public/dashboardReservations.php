@@ -109,7 +109,7 @@ include("../src/reservationsEdit.php");
         <form action="../src/reservationsCreate.php" method="POST">
           <!-- Modal header -->
           <div class="modal-header">
-            <h1 class="modal-title fs-5" id="ModalLabel">Criar utilizador</h1>
+            <h1 class="modal-title fs-5" id="ModalLabel">Criar reserva</h1>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
 
