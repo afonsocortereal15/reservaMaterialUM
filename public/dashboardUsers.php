@@ -125,13 +125,13 @@ include("../src/usersEdit.php");
                 <option value="" selected>Selecione o tipo de utilizador</option>
                 <?php
                 // Query to retrieve all types from the database
-                $sql = "SELECT * FROM users";
+                $sql = "SELECT * FROM usertype";
                 $result = $conn->query($sql);
 
                 if ($result->num_rows > 0) {
                   while ($row = $result->fetch_assoc()) {
                     // Generate options for the select dropdown
-                    echo "<option value=\"" . $row["typeUser"] . "\">" . $row["typeUser"] . "</option>";
+                    echo "<option value=\"" . $row["idType"] . "\">" . $row["nameType"] . "</option>";
                   }
                 } else {
                   // Display a message if no users are found
