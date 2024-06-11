@@ -66,9 +66,9 @@ include("../src/search.php")
       <div class="container">
         <div class="row gx-5 align-items-center justify-content-center">
           <div class="col-md-12 bg-white rounded-3" style="padding: 20px;">
-          <div class="text-center">
-            <h2>As Minhas Reservas</h2>
-          </div>
+            <div class="text-center">
+              <h2>As Minhas Reservas</h2>
+            </div>
             <form action="reservations.php" method="GET">
               <!-- User select -->
               <select class="mb-1" id="user" name="user" required>
@@ -92,44 +92,13 @@ include("../src/search.php")
               <!-- Search button -->
               <button type="submit" class="btn w-25" style="background: #cc6633; color: white;">Pesquisar</button>
             </form>
-            <table class="table">
-              <thead>
-                <tr>
-                  <th scope="col">#</th>
-                  <th scope="col">Material</th>
-                  <th scope="col">Início reserva</th>
-                  <th scope="col">Fim reserva</th>
-                </tr>
-              </thead>
-              <tbody>
-                <?php
-                // Check if the search functionality received user information
-                if (isset($_GET['user'])) {
-                  $userSearch = $_GET['user'];
-                  printUserReservations($userSearch);
-                }
-                ?>
-              </tbody>
-            </table>
-            <form action="../src/cancelReservation.php">
-              <select class="mb-1" name="cancelReservation" required>
-                <option value="" selected>Selecione reserva</option>
-                <?php
-                // Query the database for reservations associated with the current user
-                $sql = "SELECT * FROM reservations WHERE idUser=$userSearch";
-                $result = $conn->query($sql);
-
-                // Check if any reservations were returned
-                if ($result->num_rows > 0) {
-                  // Loop through the results and output an option for each reservation
-                  while ($row = $result->fetch_assoc()) {
-                    echo "<option value=\"" . $row["idReservation"] . "\">" . "Reserva nº " . $row["idReservation"] .  "</option>";
-                  }
-                }
-                ?>
-              </select>
-              <button type="submit" class="btn btn-danger w-25">Cancelar reserva</button>
-            </form>
+            <?php
+            // Check if the search functionality received user information
+            if (isset($_GET['user'])) {
+              $idUser = $_GET['user'];
+              printUserReservations($idUser);
+            }
+            ?>
           </div>
         </div>
       </div>

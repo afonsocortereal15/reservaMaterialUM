@@ -6,7 +6,8 @@ include("../inc/connect.inc");
 $searchQuery = isset($_GET['searchQuery']) ? htmlspecialchars($_GET['searchQuery']) : '';
 
 // Function to print the materials table based on the search query
-function printMaterialsTable() {
+function printMaterialsTable()
+{
   // Use global variables for database connection and search query
   global $conn;
   global $searchQuery;
@@ -37,18 +38,31 @@ function printMaterialsTable() {
 }
 
 // Function to print user reservations based on the user ID
-function printUserReservations($userSearch) {
+function printUserReservations($idUser)
+{
   // Use global variable for database connection
   global $conn;
 
   // Check if the user ID is set
-  if (isset($userSearch)) {
+  if (isset($idUser) and $idUser != 0) {
     // SQL query to select reservations for the specified user
-    $sql = "SELECT * FROM reservations WHERE idUser=$userSearch";
+    $sql = "SELECT * FROM reservations WHERE idUser=$idUser";
     $result = mysqli_query($conn, $sql);
 
     // Check if there are any results
     if (mysqli_num_rows($result) > 0) {
+      echo '
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Material</th>
+            <th scope="col">Início reserva</th>
+            <th scope="col">Fim reserva</th>
+          </tr>
+        </thead>
+        <tbody>
+      ';
       // Loop through each result and print a table row
       while ($row = mysqli_fetch_assoc($result)) {
         // Print the table row with reservation information
@@ -61,6 +75,30 @@ function printUserReservations($userSearch) {
       </tr>
       ';
       }
+
+
+      echo '
+    </tbody>
+    </table>
+    <form action="../src/cancelReservation.php">
+      <select class="mb-1" name="cancelReservation" required>
+        <option value="" selected>Selecione reserva</option>
+          ' .
+        // Query the database for reservations associated with the current user
+        $sql = "SELECT * FROM reservations WHERE idUser=$idUser";
+      $result = $conn->query($sql);
+
+      // Loop through the results and output an option for each reservation
+      while ($row = $result->fetch_assoc()) {
+        echo "<option value=\"" . $row["idReservation"] . "\">" . "Reserva nº " . $row["idReservation"] .  "</option>";
+      }
+      '';
+      echo '
+        </select>
+        <button type="submit" class="btn btn-danger w-25">Cancelar reserva</button>
+      </form> ';
+    } else {
+      echo 'Não foram encontradas reservas';
     }
   }
 }
